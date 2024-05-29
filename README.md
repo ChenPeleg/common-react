@@ -10,11 +10,12 @@ Just take the component you need and paste it into your project. You can then mo
 
 The basic set that is used by the package is the follow.
 
-important: the following is a template and should can modified to almost any react project.
+> important: the following is a template and should can modified to almost any react project.
 
-The only things you need are:
-- React 18^
-- Tailwind CSS
+
+> **The only things you need are:**
+> - React 18^
+> - Tailwind CSS
 
 The rest including Typescript, ESLint, Prettier, and Vite are optional, at least for the basic setup.
 

@@ -1,0 +1,33 @@
+name: E2E Tests
+
+on:
+  workflow_run:
+    workflows: ["CI Tests"]
+    types:
+      - completed
+    branches:
+      - main
+      - publish
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x, 16.x, 18.x]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: unzip files for the e2e test
+        run: |
+          unzip ./test/e2e/zip/*.zip -d ../
+      - name: Check that the folders exist
+        run: |
+          cd ../ 
+          cd accessibility
+      - run: npm run e2e

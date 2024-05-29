@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "update": "node src/library/scripts/loadChangedAssets.js",
+    "update": "node src/react-common/scripts/loadChangedAssets.js",
     "dev": "vite",
     "test": "vitest --run",
     "build": "tsc && vite build",

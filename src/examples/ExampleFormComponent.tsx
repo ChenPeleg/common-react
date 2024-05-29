@@ -4,8 +4,8 @@ import { AppDialog } from '../shared/AppDialog/AppDialog.tsx';
 import { AppButton } from '../shared/AppButton/AppButton.tsx';
 import { TextInput } from '../shared/TextInput/TextInput.tsx';
 import { validateEmail } from '../utils/validateEmail.ts';
-import { useFormState } from '../library/hooks/useFormState.ts';
-import { AppDropdown } from '../library/dropdown/AppDropDown.tsx';
+import { useFormState } from '../react-common/hooks/useFormState.ts';
+import { AppDropdown } from '../react-common/dropdown/AppDropDown.tsx';
 
 export const ExampleFormComponent = () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

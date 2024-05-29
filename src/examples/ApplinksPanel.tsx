@@ -1,4 +1,4 @@
-import { Popover } from '../library/popover/Popover.tsx';
+import { Popover } from '../react-common/popover/Popover.tsx';
 
 export const ApplinksPanel = () => {
     // const user = {

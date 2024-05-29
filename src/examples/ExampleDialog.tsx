@@ -1,12 +1,11 @@
 import React from 'react';
 import { DialogModal } from '../react-common/dialog/DialogModal.tsx';
-import { AppDialog } from '../shared/AppDialog/AppDialog.tsx';
-import { useI18n } from '../i18n/i18n.tsx';
+
 
 export const ExampleDialog = () => {
     const [showModal, setShowModal] = React.useState(false);
     const [warningSaveRecord, setWarningSaveRecord] = React.useState(false);
-    const { t } = useI18n();
+
 
     return (
         <div className={'p-8'}>
@@ -26,16 +25,66 @@ export const ExampleDialog = () => {
             >
                 Show AppDialog
             </button>
-            <AppDialog
-                isOpen={warningSaveRecord}
-                setIsOpen={setWarningSaveRecord}
-                trueText={t('Got it')}
-                falseText={t('Exit')}
-                title={t('Login Failed')}
-                onTrue={() => setWarningSaveRecord(false)}
+            <DialogModal
+                showDialog={warningSaveRecord}
+                setShowDialog={setWarningSaveRecord}
+
             >
-                {t('User or password are incorrect')}
-            </AppDialog>
+                <div
+                    className="bg-alblue-400/60 fixed inset-0"
+                    aria-hidden="true"
+                />
+
+                {/* Full-screen scrollable container */}
+                <div className="fixed inset-0 overflow-y-auto">
+                    {/* Container to center the panel */}
+                    <div className="flex min-h-full items-center justify-center p-4">
+                        {/* The actual dialog panel  */}
+                        <div
+                            id={'dialog'}
+                            className="mx-auto max-w-md rounded-md bg-white p-6"
+                        >
+                            <div className="pb-3">{'icon'}</div>
+                            <div id="dialog-title" className="text-2xl font-medium">
+                                {'title'}
+                            </div>
+                            <div
+                                id="dialog-description"
+                                className="text-app-grey-10 w-96 pb-5"
+                            >
+                                {'children'}
+                            </div>
+                            <div className="-mx-6 my-2 h-2 pb-3">
+                                <hr />
+                            </div>
+                            <div className="flex w-full flex-row justify-end gap-2">
+
+                                    <span>
+                                    <button className={'globals-app-button h-9 py-1.5'}
+                                            onClick={() => setWarningSaveRecord(false)}>
+
+
+
+                                        close
+                                    </button>
+                                </span>
+                                )
+                                <div className="w-24">
+                                    <button
+                                        className={'h-9 py-1.5'}
+                                        onClick={() => {
+                                            setWarningSaveRecord(false);
+                                            setShowModal(false);
+                                        }}
+                                    >
+                                        {'trueText'}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </DialogModal>
 
             <DialogModal setShowDialog={setShowModal} showDialog={showModal}>
                 <div className={'border-2 border-blue-400 bg-white p-5'}>

@@ -1,8 +1,18 @@
-import { NavLink, Outlet, useNavigate } from 'react-router-dom';
+import { NavLink,   Route, Routes, useNavigate } from 'react-router-dom';
+import favicon from '../../public/favicon.png';
+import { ExampleDialog } from './ExampleDialog.tsx';
+import { ExampleFormComponent } from './ExampleFormComponent.tsx';
+import { ExampleMenu } from './ExampleMenu.tsx';
+import { ExamplePopover } from './ExamplePopover.tsx';
 
-const exampleRouts = [{
-    path: '/examples/applinksPanel',
-    name: 'Applinks Panel',
+import { ExampleToast } from './ExampleToast.tsx';
+import { ExampleToastExternal } from './ExampleToastExternal.tsx';
+import { About } from './About.tsx';
+
+const exampleRouts =
+    [{
+    path: '/about',
+    name: 'About',
 }, {
     path: '/examples/dialog',
     name: 'Dialog',
@@ -28,9 +38,9 @@ const exampleRouts = [{
 
 export const Site = () => {
     const navigate = useNavigate();
-    return <div className={'w-screen h-screen'} id={'site-root'}>
+    return <div className={'w-screen h-screen overflow-x-hidden overflow-y-hidden'} id={'site-root'}>
         <div
-            id={'nav-bar-surface'}
+            id={'nav-bar-container'}
             className={' h-14  bg-white shadow-md  '}
         >
             <div
@@ -44,9 +54,10 @@ export const Site = () => {
                     <NavLink className={'hidden sm:flex'} to={'/'}>
                         <div
                             id={'navbar-left'}
-                            className={'flex  h-full flex-row   items-center hover:text-gray-400'}
+                            className={'flex  h-full flex-row  gap-3  items-center hover:text-gray-400'}
                         >
-                            appLogo
+                            <img className={'w-6 h-6'} src={favicon} alt={'app logo'} />
+                            <span className={'text-2xl font-semibold'}> Common React Component and utils</span>
                         </div>
                     </NavLink>
                     <NavLink className={'mr-1 flex sm:hidden'} to={'/'}>
@@ -67,8 +78,8 @@ export const Site = () => {
                             onChange={(event) => navigate(event.target.value)}
                         >
                             {exampleRouts.map((link) => (<option key={link.name} value={link.path}>
-                                    {link.name}
-                                </option>))}
+                                {link.name}
+                            </option>))}
                         </select>
                     </div>
                 </div>
@@ -90,47 +101,79 @@ export const Site = () => {
                 </div>
             </div>
         </div>
-        <main>
-            <h1 className={'text-2xl '}>
-                Common React components and hooks
-            </h1>
-        </main>
 
+        <div id={'content-container'} className={'flex   w-screen flex-row '}>
+            <nav className={'     top-0 z-20 h-screen min-w-80 w-80  shadow '}>
+                <nav>
+                    <div className={'flex flex-col gap-3'}>
+                        <div className={'h-2'}></div>
+                        {exampleRouts.map((link) => (<div
+                            key={link.name}
+                            className={'  w-full  pr-6 '}
+                        >
+                            <NavLink
+                                className={({
+                                                isActive,
+                                                isPending,
+                                            }) => ' flex flex-row items-center justify-start   rounded-r-full  p-4 text-lg font-semibold hover:bg-gray-100 ' + (isPending ? 'pending' : isActive ? 'bg-gradient-to-r from-app-blue   to-app-purple text-white hover:bg-gray-300' : '')}
+                                to={`${link.path}`}
+                            >
+                                <div className={'pl-8'}>
+                                    <span>{link.name}</span>
+                                </div>
+                            </NavLink>
+                        </div>))}
+                    </div>
+                </nav>
+            </nav>
 
-        <div
-            id={'app-screen-base-layout'}
-            className={'flex w-screen flex-col '}
-        >
-            <div id={'navbar-padding'} className={'h-14'}></div>
-            <div className={'flex w-screen flex-row'}>
-                <section className={' '}>
-                    <nav>
-                        <div className={'flex flex-col gap-3'}>
-                            <div className={'h-2'}></div>
-                            {exampleRouts.map((link) => (<div
-                                    key={link.name}
-                                    className={'  w-full  pr-6 '}
-                                >
-                                    <NavLink
-                                        className={({
-                                                        isActive,
-                                                        isPending,
-                                                    }) => ' flex flex-row items-center justify-start   rounded-r-full  p-4 text-lg font-semibold hover:bg-gray-100 ' + (isPending ? 'pending' : isActive ? 'bg-gradient-to-r from-app-blue   to-app-purple text-white hover:bg-gray-300' : '')}
-                                        to={`${link.path}`}
-                                    >
-                                        <div className={'pl-8'}>
-                                            <span>{link.name}</span>
-                                        </div>
-                                    </NavLink>
-                                </div>))}
-                        </div>
-                    </nav>
-                </section>
-                <Outlet />
-            </div>
+            <main className={'w-full h-full bg-amber-400  '}>
+                <Routes>
+                <Route path="/examples" element={ <></>}>
+                    <Route
+                        path="/examples/dialog"
+                        element={
+
+                                <ExampleDialog />
+
+                        }
+                    />
+                    <Route
+                        path="/examples/form"
+                        element={<ExampleFormComponent />}
+                    />
+                    <Route path="/examples/menu" element={<ExampleMenu />} />
+                    <Route
+                        path="/examples/popover"
+                        element={<ExamplePopover />}
+                    />
+                    <Route
+                        path="/examples/applinksPanel"
+                        element={<ExamplePopover />}
+                    /> 
+                    <Route path="/examples/toast" element={<ExampleToast />} />
+                    <Route
+                        path="/examples/toast-external"
+                        element={<ExampleToastExternal />}
+                    />
+
+                    <Route
+                        path={''}
+                        element={< About/>}
+                    />  <Route
+                    path={'/about'}
+                    element={< About/>}
+                />
+                </Route>
+                </Routes>
+
+            </main>
+
 
         </div>
+
         )
+
     </div>;
 
 };

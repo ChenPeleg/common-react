@@ -1,5 +1,4 @@
 import { Popover } from '../react-common/popover/Popover.tsx';
-import { AppButton } from '../shared/AppButton/AppButton.tsx';
 import { MenuOption } from '../react-common/dropdown/MenuOption.ts';
 import React from 'react';
 import { AppDropdown } from '../react-common/dropdown/AppDropDown.tsx';
@@ -18,7 +17,7 @@ export const ExampleMenu = () => {
                 'flex h-96 w-3/4 flex-col items-center  justify-between rounded-lg bg-gray-100 p-8 shadow-lg'
             }
         >
-            <Popover button={<AppButton>Show menu</AppButton>}>
+            <Popover button={<button className={'globals-app-button'}>Show menu</button>}>
                 {(closePopover) => (
                     <div className={'  bg-white p-5'}>
                         <p className={'bg-white'}>

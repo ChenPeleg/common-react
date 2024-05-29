@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
-import { AppDialog } from '../shared/AppDialog/AppDialog.tsx';
-import { AppButton } from '../shared/AppButton/AppButton.tsx';
-import { TextInput } from '../shared/TextInput/TextInput.tsx';
-import { validateEmail } from '../utils/validateEmail.ts';
+
+
 import { useFormState } from '../react-common/hooks/useFormState.ts';
 import { AppDropdown } from '../react-common/dropdown/AppDropDown.tsx';
+import { DialogModal } from '../react-common/dialog/DialogModal.tsx';
 
 export const ExampleFormComponent = () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -31,7 +30,7 @@ export const ExampleFormComponent = () => {
         if (!values.fullName) {
             errors.push('Full name is required');
         }
-        if (!validateEmail(formRef?.current?.username?.value)) {
+        if (! formRef?.current?.username?.value ) {
             errors.push('Invalid address Email 2');
         }
         if (formState.isValid && !formState.arePasswordsEqual) {
@@ -100,14 +99,14 @@ export const ExampleFormComponent = () => {
                                     className="flex flex-col gap-3"
                                 >
                                     <div className="grid h-16 grid-cols-2 gap-3">
-                                        <TextInput
+                                        <input
                                             className={
                                                 'h-12 w-full min-w-full rounded-lg border border-gray-300  '
                                             }
                                             name="fullName"
                                             placeholder="Full Name"
                                         />
-                                        <TextInput
+                                        <input
                                             className={
                                                 'h-12 w-full min-w-full rounded-lg border border-gray-300  '
                                             }
@@ -116,14 +115,14 @@ export const ExampleFormComponent = () => {
                                         />
                                     </div>
                                     <div className="grid h-16   grid-cols-2 gap-3">
-                                        <TextInput
+                                        <input
                                             className={
                                                 'h-12 w-full min-w-full rounded-lg border border-gray-300  '
                                             }
                                             name="age"
                                             placeholder="Age"
                                         />
-                                        <TextInput
+                                        <input
                                             className={
                                                 'h-12 w-full min-w-full rounded-lg border border-gray-300  '
                                             }
@@ -157,7 +156,7 @@ export const ExampleFormComponent = () => {
                                             defaultValue={null}
                                         />
 
-                                        <TextInput
+                                        <input
                                             className={
                                                 'h-12 w-full min-w-full rounded-lg border border-gray-300  '
                                             }
@@ -203,14 +202,14 @@ export const ExampleFormComponent = () => {
                                         className="h-16"
                                         data-testid={'login-button'}
                                     >
-                                        <AppButton
+                                        <button className={'globals-app-button h-12'}
                                             onClick={submitForm}
                                             type="button"
                                             disabled={!formState.isValid}
-                                            className={'h-12'}
+
                                         >
                                             Sign Up
-                                        </AppButton>
+                                        </button>
                                     </span>
                                 </div>
                                 <div
@@ -237,16 +236,14 @@ export const ExampleFormComponent = () => {
                     </div>
                 </div>
                 <div />;
-                <AppDialog
-                    isOpen={badLoginDialogOpen}
-                    setIsOpen={setBadLoginDialogOpen}
-                    trueText="Got it"
-                    falseText="Exit"
-                    title="Login Failed"
-                    onTrue={() => setBadLoginDialogOpen(false)}
+                <DialogModal
+                    showDialog={badLoginDialogOpen}
+
+                    setShowDialog={setBadLoginDialogOpen}
+
                 >
                     User or password are incorrect
-                </AppDialog>
+                </DialogModal>
                 ;
             </div>
         );

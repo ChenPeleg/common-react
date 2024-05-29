@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppButton } from '../shared/AppButton/AppButton.tsx';
+
 import { Toast } from '../react-common/toast/Toast.tsx';
 
 export const ExampleToast = () => {
@@ -12,9 +12,9 @@ export const ExampleToast = () => {
             }
         >
             <div className={'w-24'}>
-                <AppButton onClick={() => setShowToast(!showToast)}>
+                <button onClick={() => setShowToast(!showToast)}>
                     show toast
-                </AppButton>
+                </button>
             </div>
 
             <Toast

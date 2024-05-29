@@ -111,7 +111,7 @@ export class HttpClient {
         }
         return response;
     }
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
     buildFetchConfig(
         method: string = 'GET',
         data: any,

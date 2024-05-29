@@ -129,6 +129,14 @@ export const Site = () => {
 
             <main className={'w-full h-full bg-amber-400  '}>
                 <Routes>
+
+                    <Route
+                        path={''}
+                        element={< About/>}
+                    />  <Route
+                    path={'/about'}
+                    element={< About/>}
+                />
                 <Route path="/examples" element={ <></>}>
                     <Route
                         path="/examples/dialog"
@@ -150,20 +158,13 @@ export const Site = () => {
                     <Route
                         path="/examples/applinksPanel"
                         element={<ExamplePopover />}
-                    /> 
+                    />
                     <Route path="/examples/toast" element={<ExampleToast />} />
                     <Route
                         path="/examples/toast-external"
                         element={<ExampleToastExternal />}
                     />
 
-                    <Route
-                        path={''}
-                        element={< About/>}
-                    />  <Route
-                    path={'/about'}
-                    element={< About/>}
-                />
                 </Route>
                 </Routes>
 

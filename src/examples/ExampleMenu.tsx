@@ -1,8 +1,8 @@
-import { Popover } from '../library/popover/Popover.tsx';
+import { Popover } from '../react-common/popover/Popover.tsx';
 import { AppButton } from '../shared/AppButton/AppButton.tsx';
-import { MenuOption } from '../library/dropdown/MenuOption.ts';
+import { MenuOption } from '../react-common/dropdown/MenuOption.ts';
 import React from 'react';
-import { AppDropdown } from '../library/dropdown/AppDropDown.tsx';
+import { AppDropdown } from '../react-common/dropdown/AppDropDown.tsx';
 
 export const ExampleMenu = () => {
     const [selectedOption, setSelectedOption] =

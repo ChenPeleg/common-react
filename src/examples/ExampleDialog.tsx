@@ -1,5 +1,5 @@
 import React from 'react';
-import { DialogModal } from '../library/dialog/DialogModal.tsx';
+import { DialogModal } from '../react-common/dialog/DialogModal.tsx';
 import { AppDialog } from '../shared/AppDialog/AppDialog.tsx';
 import { useI18n } from '../i18n/i18n.tsx';
 

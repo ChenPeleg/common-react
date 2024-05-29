@@ -1,6 +1,6 @@
 import { AppTable, AppTableProps } from '../ui/table/AppTable.tsx';
 import React from 'react';
-import { useFormState } from '../library/hooks/useFormState.ts';
+import { useFormState } from '../react-common/hooks/useFormState.ts';
 import { TextInput } from '../shared/TextInput/TextInput.tsx';
 import { Icons } from '../assets/icons/Icons.tsx';
 import { useI18n } from '../i18n/i18n.tsx';

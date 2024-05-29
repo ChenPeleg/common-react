@@ -1,6 +1,6 @@
 import React from 'react';
 import { AppButton } from '../shared/AppButton/AppButton.tsx';
-import { Toast } from '../library/toast/Toast.tsx';
+import { Toast } from '../react-common/toast/Toast.tsx';
 
 export const ExampleToast = () => {
     const [showToast, setShowToast] = React.useState(false);

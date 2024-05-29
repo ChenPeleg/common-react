@@ -1,5 +1,5 @@
 import { AppButton } from '../shared/AppButton/AppButton.tsx';
-import { useToast } from '../library/toast/ToastProvider.tsx';
+import { useToast } from '../react-common/toast/ToastProvider.tsx';
 
 export const ExampleToastExternal = () => {
     const toast = useToast();

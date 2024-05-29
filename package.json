@@ -1,6 +1,5 @@
 {
-  "name": "common-react",
-  "private": true,
+  "name": "common-react", 
   "version": "0.0.0",
   "type": "module",
   "scripts": {

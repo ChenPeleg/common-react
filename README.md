@@ -6,6 +6,20 @@ This package is a collection of common React components and utilities that are u
 
 Just take the component you need and paste it into your project. You can then modify it as needed.
 
+
+# Use cases 
+
+I would recommend using this package in the following cases:
+
+- You are doing a side project that will take some years, and you don't want to depend on a package that may be abandoned.
+- You are working on a project and don't want to depend on visual packages that needs to be tweaked
+
+I would not recommend using this package in the following cases:
+- big projects 
+- projects that need to be maintained by a team of developers
+- projects that need to be updated frequently
+
+
 # Setup 
 
 The basic set that is used by the package is the follow.

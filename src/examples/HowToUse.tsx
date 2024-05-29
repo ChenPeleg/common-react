@@ -1,5 +1,5 @@
 
-export const About = () => {
+export const HowToUse = () => {
     return (
         <div
             id={'app-screen-base-layout'}

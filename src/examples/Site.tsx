@@ -1,4 +1,4 @@
-import { NavLink,   Route, Routes, useNavigate } from 'react-router-dom';
+import { NavLink, Outlet, Route, Routes, useNavigate } from 'react-router-dom';
 import favicon from '../../public/favicon.png';
 import { ExampleDialog } from './ExampleDialog.tsx';
 import { ExampleFormComponent } from './ExampleFormComponent.tsx';
@@ -8,20 +8,20 @@ import { ExamplePopover } from './ExamplePopover.tsx';
 import { ExampleToast } from './ExampleToast.tsx';
 import { ExampleToastExternal } from './ExampleToastExternal.tsx';
 import { About } from './About.tsx';
+import { HowToUse } from './HowToUse.tsx';
 
-const exampleRouts =
-    [{
+const exampleRouts = [{
     path: '/about',
     name: 'About',
+}, {
+    path: '/how-to-use',
+    name: 'How to use',
 }, {
     path: '/examples/dialog',
     name: 'Dialog',
 }, {
     path: '/examples/form',
     name: 'Form',
-}, {
-    path: '/examples/table',
-    name: 'Table',
 }, {
     path: '/examples/popover',
     name: 'Popover',
@@ -127,46 +127,49 @@ export const Site = () => {
                 </nav>
             </nav>
 
-            <main className={'w-full h-full bg-amber-400  '}>
+            <main className={'w-full h-full bg-amber-400  min-h-44 '}>
                 <Routes>
 
                     <Route
                         path={''}
-                        element={< About/>}
-                    />  <Route
+                        element={< About />}
+                    /> <Route
                     path={'/about'}
-                    element={< About/>}
-                />
-                <Route path="/examples" element={ <></>}>
-                    <Route
-                        path="/examples/dialog"
-                        element={
+                    element={< About />}/>
+                        <Route
+                        path={'/how-to-use'}
+                    element={< HowToUse />
+                    }/>
 
+                    <Route path="/examples" element={<><Outlet /></>}>
+                        <Route
+                            path="/examples/dialog"
+                            element={
                                 <ExampleDialog />
+                            }
+                        />
+                        <Route
+                            path="/examples/form"
+                            element={<ExampleFormComponent />}
+                        />
+                        <Route path="/examples/menu" element={<ExampleMenu />} />
+                        <Route
+                            path="/examples/popover"
+                            element={<ExamplePopover />}
+                        />
+                        <Route
+                            path="/examples/applinksPanel"
+                            element={<ExamplePopover />}
+                        />
+                        <Route path="/examples/toast" element={<ExampleToast />} />
+                        <Route
+                            path="/examples/toast-external"
+                            element={<ExampleToastExternal />}
+                        />
 
-                        }
-                    />
-                    <Route
-                        path="/examples/form"
-                        element={<ExampleFormComponent />}
-                    />
-                    <Route path="/examples/menu" element={<ExampleMenu />} />
-                    <Route
-                        path="/examples/popover"
-                        element={<ExamplePopover />}
-                    />
-                    <Route
-                        path="/examples/applinksPanel"
-                        element={<ExamplePopover />}
-                    />
-                    <Route path="/examples/toast" element={<ExampleToast />} />
-                    <Route
-                        path="/examples/toast-external"
-                        element={<ExampleToastExternal />}
-                    />
-
-                </Route>
+                    </Route>
                 </Routes>
+                <Outlet />
 
             </main>
 

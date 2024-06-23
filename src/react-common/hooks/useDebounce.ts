@@ -18,7 +18,7 @@ export const useDebounce = (
         clearTimeout(timer);
         timer = setTimeout(() => {
             func(...args);
-        }, delayMs);
+        }, delayMs) as any;
     };
     return React.useMemo(
         () =>

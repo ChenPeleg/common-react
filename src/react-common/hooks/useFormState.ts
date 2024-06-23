@@ -121,11 +121,10 @@ export const useFormState = <T extends Record<string, any>>(
         if (Object.keys(valuesToSet).length > 0) {
             setFormValuesInElements(formRef.current, valuesToSet);
         }
-
-        // @ts-expect-error the values are supposed to be the same
+ 
         setFormState((prevState) => ({
             ...prevState,
-            values: { ...currentValues },
+            values: { ...prevState.values, ...currentValues },
         }));
 
         formRef.current.onchange = (ev: any) => onChangeListener(ev);

@@ -45,11 +45,12 @@ export const Toast = ({
         if (show) {
             const popover = popOverRef.current;
             popover && popover['showPopover'] && popover['showPopover']();
-        } else
+        } else {
             setTimeout(() => {
                 const popover = popOverRef.current;
                 popover && popover['hidePopover'] && popover['hidePopover']();
             }, 200);
+        }
     }, [show]);
     const setPopoverPosition = () => {
         // if (!popOverRef.current || !buttonRef.current) {

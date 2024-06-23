@@ -1,9 +1,9 @@
-export const getEnumEntries = (enumb: any): string[] => {
+export const getEnumEntries = (enums: any): string[] => {
     const arr: string[] = [];
-    for (const enumMember in enumb) {
+    for (const enumMember in enums) {
         const isNumericalProperty: boolean = parseInt(enumMember, 10) >= 0;
         if (isNumericalProperty) {
-            arr.push(enumb[enumMember]);
+            arr.push(enums[enumMember]);
         }
     }
     return arr;
@@ -18,3 +18,4 @@ export const getEnumNumbers = (enumb: any): number[] => {
     }
     return arr;
 };
+

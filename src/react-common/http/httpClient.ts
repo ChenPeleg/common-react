@@ -15,6 +15,22 @@ export interface HttpClientConfig {
 
 export class HttpClient {
     config: HttpClientConfig;
+    private _interceptors = {
+        onFulfilled: (value: Promise<Response>) => value,
+        onRejected: (error: Promise<Response>) => error,
+    };
+    interceptors = {
+        use: (
+            onFulfilled?: (value: Promise<Response>) => Promise<Response>,
+            onRejected?: (error: Promise<Response>) => Promise<Response>
+        ) => {
+            this._interceptors.onFulfilled =
+                onFulfilled || this._interceptors.onFulfilled;
+            this._interceptors.onRejected =
+                onRejected || this._interceptors.onRejected;
+        },
+    };
+
     constructor(config: HttpClientConfig) {
         this.config = {
             mode: 'cors', // no-cors, *cors,  same-origin
@@ -28,25 +44,30 @@ export class HttpClient {
         this.config.headers['Content-Type'] =
             this.config.headers['Content-Type'] || 'application/json';
     }
-    interceptors = {
-        use: (
-            onFulfilled?: (value: Promise<Response>) => Promise<Response>,
-            onRejected?: (error: Promise<Response>) => Promise<Response>
-        ) => {
-            this._interceptors.onFulfilled =
-                onFulfilled || this._interceptors.onFulfilled;
-            this._interceptors.onRejected =
-                onRejected || this._interceptors.onRejected;
-        },
-    };
-    private _interceptors = {
-        onFulfilled: (value: Promise<Response>) => value,
-        onRejected: (error: Promise<Response>) => error,
-    };
 
     static create(config: HttpClientConfig) {
         return new HttpClient(config);
     }
+
+    static async fetchWrapper(input: RequestInfo | URL, init?: RequestInit) {
+        return fetch(input, init);
+    }
+
+    static buildBody(data: any, _options?: RequestInit) {
+        if (data === undefined || data === null) {
+            return undefined;
+        }
+        if (
+            _options?.headers &&
+            // @ts-expect-error this should work
+            _options.headers['Content-Type'] === 'application/json' &&
+            data
+        ) {
+            return JSON.stringify(data);
+        }
+        return data;
+    }
+
     async request({
         url,
         method,
@@ -77,15 +98,43 @@ export class HttpClient {
             throw error;
         }
     }
+
     async get(url: string, options?: any) {
-        return this.request({ url, method: 'GET', body: undefined, options });
+        return this.request({
+            url,
+            method: 'GET',
+            body: undefined,
+            options,
+        });
     }
+
     async post(url: string, body: any, options?: RequestInit) {
-        return this.request({ url, method: 'POST', body, options });
+        if (body instanceof FormData) {
+            options = { ...options };
+            // @ts-expect-error this should work
+            if (options?.headers['Content-Type'] === 'auto') {
+                // @ts-expect-error this is a FormData object
+                delete options.headers['Content-Type'];
+            }
+        }
+
+        return this.request({
+            url,
+            method: 'POST',
+            body,
+            options,
+        });
     }
+
     async put(url: string, body: any, options?: RequestInit) {
-        return this.request({ url, method: 'PUT', body, options });
+        return this.request({
+            url,
+            method: 'PUT',
+            body,
+            options,
+        });
     }
+
     async delete(url: string, options?: RequestInit) {
         return this.request({
             url,
@@ -94,10 +143,10 @@ export class HttpClient {
             options,
         });
     }
-    static async fetchWrapper(input: RequestInfo | URL, init?: RequestInit) {
-        return fetch(input, init);
-    }
-    async responseWrapper(response: Promise<Response>) {
+
+    async responseWrapper(
+        response: Promise<Response>
+    ): Promise<Response & { data?: any }> {
         if (response instanceof Error) {
             return this._interceptors.onRejected(response);
         } else {
@@ -107,7 +156,20 @@ export class HttpClient {
             this.config?.headers &&
             this.config.headers['Content-Type'] === 'application/json'
         ) {
-            return (await response).json();
+            const originalResponse = await response;
+            if (!originalResponse.ok) {
+                throw new Error('Network Error');
+            }
+            const ResponseInit: ResponseInit = {
+                headers: originalResponse.headers,
+                status: originalResponse.status,
+                statusText: originalResponse.statusText,
+            };
+            const clone = new Response(null, ResponseInit);
+            const data = await originalResponse.json();
+            // @ts-expect-error adding data to the response object
+            clone.data = data;
+            return clone;
         }
         return response;
     }
@@ -127,7 +189,7 @@ export class HttpClient {
             headers,
             redirect,
             referrerPolicy,
-            body: data ? JSON.stringify(data) : undefined, // body data type must match "Content-Type" header
+            body: HttpClient.buildBody(data, _options), // body data type must match "Content-Type" header
             ..._options,
         };
     }

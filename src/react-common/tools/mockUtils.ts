@@ -17,3 +17,5 @@ export const randomCodeWithLetters = (length: number = 10) => {
     }
     return code;
 };
+export const randomFromArray = <T>(arr: T[]): T =>
+    arr[Math.floor(Math.random() * arr.length)];

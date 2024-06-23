@@ -10,7 +10,6 @@ export const AppDropdownControlled = ({
     config,
     disabled = false,
     defaultLabel = 'Select an option',
-    name = 'appDropdownInputName',
 }: {
     options: MenuOption[];
     selectedOption: MenuOption | null;
@@ -30,7 +29,8 @@ export const AppDropdownControlled = ({
     name?: string;
 }) => {
     const [isOpen, setIsOpen] = React.useState(false);
-    const selectRef = React.useRef<HTMLSelectElement>(null);
+
+    // const selectRef = React.useRef<HTMLSelectElement>(null);
 
     function optionClicked(event: React.MouseEvent, option: MenuOption) {
         event.preventDefault();
@@ -63,6 +63,7 @@ export const AppDropdownControlled = ({
                     ${disabled ? ' opacity-60 ' : ' hover:bg-gray-50 '}  `}
                             disabled={disabled}
                             id="menu-button"
+                            aria-disabled={disabled ? 'true' : 'false'}
                             aria-expanded="true"
                             aria-haspopup="true"
                             onClick={() => setIsOpen(!isOpen)}
@@ -112,9 +113,14 @@ export const AppDropdownControlled = ({
                     aria-labelledby="menu-button"
                     tabIndex={-1}
                 >
-                    <div className="py-1" role="none">
+                    <ul
+                        className="py-1"
+                        role="none"
+                        aria-hidden={isOpen ? 'false' : 'true'}
+                    >
                         {options.map((option, index) => (
-                            <div
+                            <li
+                                aria-hidden={isOpen ? 'false' : 'true'}
                                 onClick={(ev) => optionClicked(ev, option)}
                                 key={option.id}
                                 className={`block cursor-pointer px-4 py-2 
@@ -126,38 +132,38 @@ export const AppDropdownControlled = ({
                                             : ''
                                     }
                                     `}
-                                aria-selected={true}
+                                aria-selected={selectedOption?.id === option.id}
                                 role="menuitem"
                                 tabIndex={-1}
                                 id={`menu-item-${index}}`}
                             >
                                 {option.label}
-                            </div>
+                            </li>
                         ))}
-                    </div>
+                    </ul>
                 </div>
-                <select
-                    role={'hidden'}
-                    aria-hidden={'true'}
-                    style={{ display: 'none' }}
-                    onChange={() => null}
-                    value={selectedOption?.id || undefined}
-                    className={'hidden'}
-                    ref={selectRef}
-                    name={name}
-                    id={name}
-                >
-                    {options.map((o) => (
-                        <option
-                            style={{ display: 'none' }}
-                            aria-hidden={'true'}
-                            key={o.id}
-                            value={o.id}
-                        >
-                            {typeof o.label === 'string' ? o.label : o.id}
-                        </option>
-                    ))}
-                </select>
+                {/*<select*/}
+                {/*    role={'hidden'}*/}
+                {/*    aria-hidden={'true'}*/}
+                {/*    style={{ display: 'none' }}*/}
+                {/*    onChange={() => null}*/}
+                {/*    value={selectedOption?.id || undefined}*/}
+                {/*    className={'hidden'}*/}
+                {/*    ref={selectRef}*/}
+                {/*    name={name}*/}
+                {/*    id={name}*/}
+                {/*>*/}
+                {/*    {options.map((o) => (*/}
+                {/*        <option*/}
+                {/*            style={{ display: 'none' }}*/}
+                {/*            aria-hidden={'true'}*/}
+                {/*            key={o.id}*/}
+                {/*            value={o.id}*/}
+                {/*        >*/}
+                {/*            {typeof o.label === 'string' ? o.label : o.id}*/}
+                {/*        </option>*/}
+                {/*    ))}*/}
+                {/*</select>*/}
             </div>
         </OutsideAlerter>
     );

@@ -9,7 +9,10 @@ export const Popover = ({
     closeOnBlur = true,
     className = '',
     style,
-    relativePosition = { xOffset: 0, yOffset: 0 },
+    relativePosition = {
+        xOffset: 0,
+        yOffset: 0,
+    },
 }: {
     button?: React.ReactNode;
     children: React.ReactNode | ((closePopover: () => void) => React.ReactNode);

@@ -1,10 +1,19 @@
 import React from 'react';
 import { Toast } from './Toast.tsx';
-interface ToastConfig {
+export interface ToastConfig {
     duration?: number;
     id?: string;
     className?: string;
-    position?: 'top' | 'bottom';
+    position?: {
+        top?: string | null,
+        bottom?: string  | null,
+        left? : string | null,
+        right? : string  | null
+    };
+    size? : {
+        width? : string,
+        height? : string
+    }
     content?: React.ReactNode | string;
 }
 export interface ToastProps {
@@ -19,7 +28,10 @@ export const ToastContext = React.createContext<ToastProps>({
     config: {
         duration: 2000,
         className: '',
-        position: 'top',
+        position: {
+            top: '50px',
+            left : '100px'
+        },
         id: '',
     },
 });
@@ -33,7 +45,7 @@ export const ToastProvider = ({ children }: { children: React.ReactNode }) => {
     const [toastConfig, setToastConfig] = React.useState<ToastConfig>({
         duration: 2000,
         className: '',
-        position: 'top',
+        position: { top : '100px', right : '150px'},
         id: '',
         content: '',
     });
@@ -86,9 +98,10 @@ export const ToastProvider = ({ children }: { children: React.ReactNode }) => {
                 {showToast && (
                     <div>
                         <Toast
+                            config={toastConfig}
                             show={showToast}
                             setShow={setShowToast}
-                            className={'fixed top-12  mx-auto  shadow-xl'}
+                            className={'relative top-12   shadow-xl'}
                         >
                             {(closePopover) => (
                                 <div className={' h-14 bg-white p-4 pl-3 pr-6'}>

@@ -1,14 +1,17 @@
 import React, { useEffect } from 'react';
 import styles from './Toast.module.css';
 import { useWindowSize } from '../hooks/useWindowResize.ts';
+import { ToastConfig } from './ToastProvider.tsx';
 
 export const Toast = ({
     show,
     setShow,
     children,
     className,
+    config
 }: {
     show: boolean;
+    config: ToastConfig
     setShow: (show: boolean) => void;
     children: React.ReactNode | ((closePopover: () => void) => React.ReactNode);
     className?: string;
@@ -53,16 +56,14 @@ export const Toast = ({
         }
     }, [show]);
     const setPopoverPosition = () => {
-        // if (!popOverRef.current || !buttonRef.current) {
-        //     return;
-        // }
-        // const buttonRect = buttonRef.current?.getBoundingClientRect();
-        // const popoverTop = buttonRect?.bottom || '300'; // + window.scrollY;
-        // const popoverLeft = buttonRect?.left || '300'; // + window.scrollX;
-        //
-        // popOverRef.current.style.top = `${popoverTop}px`;
-        // popOverRef.current.style.left = `${popoverLeft}px`;
+
     };
+    const styleAttributes = {
+        '--toast-right' : config.position?.right || 'none',
+        '--toast-left' : config.position?.left || 'none',
+        '--toast-top' :  config.position?.top || 'none',
+        '--toast-bottom' :  config.position?.bottom || 'none',
+    }
 
     const closeModal = () => {
         const popover = popOverRef.current;
@@ -70,17 +71,22 @@ export const Toast = ({
     };
     return (
         <div
+    // @ts-expect-error this is ok
+            style={{
+                ...styleAttributes
+            }}
             className={'relative flex flex-row justify-center'}
             ref={buttonRef}
         >
             <div
                 style={{
                     boxShadow: '0 1px 10px #0000001a, 0 2px 15px #0000000d',
+                    ...styleAttributes
                 }}
-                className={` rounded ${styles.popoverClass}   ${className}  `}
+                className={` rounded ${styles.toastPopover}   ${className}  top-3`}
                 // @ts-expect-error is supported in most browsers
                 ref={popOverRef}
-                id="app-popover"
+                id="app-toast"
                 popover={'manual'}
             >
                 {typeof children === 'function'

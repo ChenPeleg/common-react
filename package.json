@@ -1,9 +1,27 @@
 {
   "name": "common-react",
-  "version": "0.0.0",
+  "version": "0.0.4",
+  "description": "hours report based on git repo",
+  "main": "./src/scripts/run.js",
+  "bin": "./src/scripts/run.js",
+  "files": [
+    "src/**/*"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "react",
+    "vanilla",
+    "components",
+    "popup",
+    "hooks",
+    "tools"
+  ],
   "type": "module",
   "scripts": {
     "update": "node src/react-common/scripts/loadChangedAssets.js",
+    "copy": "node src/react-common/scripts/copyAssets.js",
     "dev": "vite",
     "test": "vitest --run",
     "build": "tsc && vite build",

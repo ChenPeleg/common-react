@@ -19,7 +19,7 @@ export const ExampleDialog = () => {
                 <a className={'text-app-blue'} href={'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog'}> dialog
                     element.</a>
             </p>
-            <p className={'w-32'}>
+            <p className={'w-52'}>
                 <button
                     className={
                         'w-22  m-4 rounded  bg-pink-300 p-2 text-sm font-semibold shadow-sm'
@@ -49,7 +49,7 @@ export const ExampleDialog = () => {
                                 id={'dialog'}
                                 className="mx-auto max-w-md rounded-md bg-white p-6 flex flex-col gap-4 shadow-lg"
                             >
-                                <div className="pb-3">{'icon'}</div>
+
                                 <div id="dialog-title" className="text-2xl font-medium">
                                   This is my modal dialog
                                 </div>

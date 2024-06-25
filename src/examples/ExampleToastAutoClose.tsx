@@ -1,7 +1,7 @@
 
 import { useToast } from '../react-common/toast/ToastProvider.tsx';
 
-export const ExampleToastExternal = () => {
+export const ExampleToastAutoClose = () => {
     const toast = useToast();
     const showToast = () => {
         toast('✅ was saved successfully');

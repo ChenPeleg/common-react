@@ -5,8 +5,7 @@ import { ExampleFormComponent } from './ExampleFormComponent.tsx';
 import { ExampleMenu } from './ExampleMenu.tsx';
 import { ExamplePopover } from './ExamplePopover.tsx';
 
-import { ExampleToast } from './ExampleToast.tsx';
-import { ExampleToastExternal } from './ExampleToastExternal.tsx';
+import { ExampleToastAutoClose } from './ExampleToastAutoClose.tsx';
 import { About } from './About.tsx';
 import { HowToUse } from './HowToUse.tsx';
 
@@ -29,11 +28,8 @@ const exampleRouts = [{
 }, {
     path: '/examples/form',
     name: 'Form',
-}, {
-    path: '/examples/toast-external',
-    name: 'Toast External',
-
-}, {
+}
+ , {
     path: '/how-to-use',
     name: 'Hooks and utils',
 }];
@@ -163,10 +159,10 @@ export const Site = () => {
                             path="/examples/applinksPanel"
                             element={<ExamplePopover />}
                         />
-                        <Route path="/examples/toast" element={<ExampleToast />} />
+                        <Route path="/examples/toast" element={<ExampleToastAutoClose />} />
                         <Route
                             path="/examples/toast-external"
-                            element={<ExampleToastExternal />}
+                            element={<ExampleToastAutoClose />}
                         />
 
                     </Route>

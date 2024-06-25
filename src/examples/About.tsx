@@ -30,6 +30,9 @@ export const About = () => {
                 npx common-react
             </code>
         </div>
+        <div>
+            This will create a new folder named "react-common" with all the components hooks and utils in your `src` folder. Then decide what to do with it, what to keep and what to delete.
+        </div>
 
 
     </div>);

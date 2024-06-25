@@ -29,10 +29,11 @@ const exampleRouts = [{
     path: '/examples/form',
     name: 'Form',
 }
- , {
-    path: '/how-to-use',
-    name: 'Hooks and utils',
-}];
+//  , {
+//     path: '/hooks',
+//     name: 'Hooks and utils',
+// }
+];
 
 export const Site = () => {
     const navigate = useNavigate();

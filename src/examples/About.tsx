@@ -1,4 +1,20 @@
+import { useToast } from '../react-common/toast/ToastProvider.tsx';
+
+const CopySvg = () => {
+    return (<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#F0f0f0">
+        <path
+            d="M360-240q-33 0-56.5-23.5T280-320v-480q0-33 23.5-56.5T360-880h360q33 0 56.5 23.5T800-800v480q0 33-23.5 56.5T720-240H360Zm0-80h360v-480H360v480ZM200-80q-33 0-56.5-23.5T120-160v-560h80v560h440v80H200Zm160-240v-480 480Z" />
+    </svg>)
+}
+
 export const About = () => {
+    const toast = useToast()
+    const copyToClipboard = (text: string) => {
+        navigator.clipboard.writeText(text).then();
+        toast('copied to clipboard !', {position : 'top'})
+
+    }
+
     return (<div
         id={'app-screen-base-layout'}
         className={'flex w-full flex-col p-10 text-base'}
@@ -24,14 +40,17 @@ export const About = () => {
         <div className={'flex flex-col  w-full '}>
 
 
-            <code className={'w-96 bg-black text-white rounded p-4 mt-10'}>
+            <code className={'w-96 bg-black text-white rounded p-4 mt-10 flex flex-row gap-5 items-center'}>
 
-
+                <button className={'rounded-full hover:bg-[#FFFFFF] hover:bg-opacity-30 p-2'} onClick={() => {
+                    copyToClipboard('npx common-react');
+                }}><CopySvg /></button>
                 npx common-react
             </code>
         </div>
         <div>
-            This will create a new folder named "react-common" with all the components hooks and utils in your `src` folder. Then decide what to do with it, what to keep and what to delete.
+            This will create a new folder named "react-common" with all the components hooks and utils in your `src` folder. Then decide
+            what to do with it, what to keep and what to delete.
         </div>
 
 

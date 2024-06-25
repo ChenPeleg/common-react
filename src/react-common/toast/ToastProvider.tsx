@@ -88,7 +88,7 @@ export const ToastProvider = ({ children }: { children: React.ReactNode }) => {
                         <Toast
                             show={showToast}
                             setShow={setShowToast}
-                            className={'relative top-12  mx-auto  shadow-xl'}
+                            className={'fixed top-12  mx-auto  shadow-xl'}
                         >
                             {(closePopover) => (
                                 <div className={' h-14 bg-white p-4 pl-3 pr-6'}>

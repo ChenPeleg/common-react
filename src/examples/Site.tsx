@@ -13,18 +13,13 @@ import { HowToUse } from './HowToUse.tsx';
 const exampleRouts = [{
     path: '/about',
     name: 'About',
-}, {
-    path: '/how-to-use',
-    name: 'How to use',
-}, {
-    path: '/examples/dialog',
-    name: 'Dialog',
-}, {
-    path: '/examples/form',
-    name: 'Form',
-}, {
+
+},{
     path: '/examples/popover',
     name: 'Popover',
+},   {
+    path: '/examples/dialog',
+    name: 'Dialog',
 }, {
     path: '/examples/menu',
     name: 'Menu',
@@ -32,8 +27,15 @@ const exampleRouts = [{
     path: '/examples/toast',
     name: 'Toast',
 }, {
+    path: '/examples/form',
+    name: 'Form',
+}, {
     path: '/examples/toast-external',
     name: 'Toast External',
+
+}, {
+    path: '/how-to-use',
+    name: 'Hooks and utils',
 }];
 
 export const Site = () => {

@@ -19,18 +19,20 @@ export const ExampleMenu = () => {
         <div
             className={'flex h-64 flex-col items-start justify-start  p-12 gap-4 '}
         >
+            <div id={'navbar-padding'} className={'h-14 text-2xl font-bold'}>Menu</div>
+
             <p>
-                This dropdown is a simple example of a dropdown menu component,  based on the HTML
+                This dropdown is a simple example of a dropdown menu component, based on the HTML
                 <a className={'text-app-blue'}
                    href={'https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/popover'}> popover element.</a>
             </p>
             <div className={'z-50 w-64'}>
-                    <AppDropdown.Controlled
-                        config={{width: 200}}
-                        options={options}
-                        selectedOption={selectedOption}
-                        setSelectedOption={setSelectedOption}
-                    />
+                <AppDropdown.Controlled
+                    config={{ width: 200 }}
+                    options={options}
+                    selectedOption={selectedOption}
+                    setSelectedOption={setSelectedOption}
+                />
 
             </div>
         </div>);

@@ -14,6 +14,7 @@ export const ExampleDialog = () => {
                 'flex h-64 flex-col items-start justify-start  p-12 gap-4 '
             }
         >
+            <div id={'navbar-padding'} className={'h-14 text-2xl font-bold'}>Dialog</div>
             <p>
                 This dialog is a simple example of a dialog component, based on the HTML
                 <a className={'text-app-blue'} href={'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog'}> dialog
@@ -51,7 +52,7 @@ export const ExampleDialog = () => {
                             >
 
                                 <div id="dialog-title" className="text-2xl font-medium">
-                                  This is my modal dialog
+                                    This is my modal dialog
                                 </div>
 
 

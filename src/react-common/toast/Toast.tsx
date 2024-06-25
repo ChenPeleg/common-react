@@ -58,6 +58,7 @@ export const Toast = ({
     const setPopoverPosition = () => {
 
     };
+    console.log(config.position)
 
     const styleAttributes = {
         '--toast-right' : config.position?.right || 'none',

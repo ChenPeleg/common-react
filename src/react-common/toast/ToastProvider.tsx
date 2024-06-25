@@ -49,7 +49,7 @@ export const ToastProvider = ({ children }: { children: React.ReactNode }) => {
     const [toastConfig, setToastConfig] = React.useState<ToastConfig>({
         duration: 2000,
         className: '',
-        position:  { top : '100px', right : '150px'},
+        position:  { top : '70px', right : '100px'},
         id: '',
         content: '',
     });

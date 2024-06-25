@@ -6,7 +6,6 @@ import { useFormState } from '../react-common/hooks/useFormState.ts';
 import { AppDropdown } from '../react-common/dropdown/AppDropDown.tsx';
 
 export const ExampleFormComponent = () => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
 
     const [formState, setFormState] = useState<{
         isValid: boolean; isDirty: boolean; arePasswordsEqual: boolean; errors: string[];

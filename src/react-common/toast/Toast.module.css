@@ -2,16 +2,15 @@
 /* Transition for the popover itself */
 :root {
     --popover-transition-duration: 0.2s;
-
-}
-.toastPopover {
-    --toast-width : 200px;
-    --toast-hight: 100px;
+    --toast-width : none;
+    --toast-hight: none;
     --toast-bottom: none;
     --toast-top: none;
     --toast-left: none;
     --toast-right: none;
+
 }
+
 
 .toastPopover[popover]:popover-open {
     opacity: 1;

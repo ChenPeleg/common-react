@@ -58,11 +58,14 @@ export const Toast = ({
     const setPopoverPosition = () => {
 
     };
+
     const styleAttributes = {
         '--toast-right' : config.position?.right || 'none',
         '--toast-left' : config.position?.left || 'none',
         '--toast-top' :  config.position?.top || 'none',
         '--toast-bottom' :  config.position?.bottom || 'none',
+        '--toast-width' : config.size?.width || '240px',
+        '--toast-height' : config.size?.width || '100px',
     }
 
     const closeModal = () => {

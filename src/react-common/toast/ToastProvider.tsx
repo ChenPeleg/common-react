@@ -32,6 +32,10 @@ export const ToastContext = React.createContext<ToastProps>({
             top: '50px',
             left : '100px'
         },
+        size : {
+            height:'100px',
+            width : '220px'
+        },
         id: '',
     },
 });

@@ -11,7 +11,7 @@ export const About = () => {
     const toast = useToast()
     const copyToClipboard = (text: string) => {
         navigator.clipboard.writeText(text).then();
-        toast('copied to clipboard !', {position : 'top', duration: 100000})
+        toast('copied to clipboard !', {  duration: 100000})
 
     }
 

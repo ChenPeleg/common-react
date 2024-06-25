@@ -22,7 +22,7 @@ export const ExampleDialog = () => {
             <p className={'w-52'}>
                 <button
                     className={
-                        'w-22  m-4 rounded  bg-pink-300 p-2 text-sm font-semibold shadow-sm'
+                        'px-5 w-22  m-4 rounded  bg-pink-300 p-2 text-sm font-semibold shadow-sm'
                     }
                     onClick={() => setShowModal(true)}
                 >

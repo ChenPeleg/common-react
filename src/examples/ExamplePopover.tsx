@@ -14,7 +14,8 @@ export const ExamplePopover = () => {
             </p>
             <p className={'w-32'}>
 
-            <Popover className={'relative   bg-red-200'} relativePosition={{}}>
+                <Popover className={'relative   bg-red-200'} relativePosition={{}}
+                         button={<div className={' px-5 w-36 cursor-pointer  m-4 rounded  bg-pink-300 p-2 text-sm font-semibold shadow-sm '}> Show popover</div>}>
                 {(closePopover) => (
                     <div className={'  bg-white p-5 '}>
                         <p className={'bg-white'}>

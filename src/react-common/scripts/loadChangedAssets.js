@@ -1,9 +1,30 @@
-import { Readable } from 'node:stream';
+import { pipeline, Readable } from 'node:stream';
 import { writeFile } from 'fs/promises';
 import { existsSync, mkdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { platform } from 'node:os';
 import { exec } from 'child_process';
+import { promisify } from 'util';
+
+
+
+const getLatestReleaseURL = async (owner, repo) => {
+  const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/releases/latest`);
+    if (!response.ok) throw new Error(`unexpected response ${response.statusText}`);
+    return await response.json();
+};
+
+
+
+const getLatestRelease  = (owner, repo) =>
+    getLatestReleaseURL(owner, repo)
+    .then(release => {
+        const asset = release.assets[0];
+        console.log(asset.browser_download_url)
+        return fetch(asset.browser_download_url );
+    })
+    .catch(console.error);
+
 
 const execPromise = async (command, extraParams = {}) => {
     return new Promise(function (resolve, reject) {
@@ -41,9 +62,13 @@ export const runUnZipper = async (
 
 
 const updateChangedLibrary = async () => {
-    const url = `https://github.com/ChenPeleg/applinks-client/archive/refs/tags/v0.18.zip`;
-    const response = await fetch(url);
+    //const url =
+    // `https://github.com/ChenPeleg/applinks-client/archive/refs/tags/v0.18.zip`;
+    // const releaseUrl = `https://github.com/ChenPeleg/applinks-client/releases/latest`;
+
+    const response = await getLatestRelease('ChenPeleg', 'applinks-client');
     const body = Readable.fromWeb(response.body);
+
     !existsSync('temp') && mkdirSync('temp');
     !existsSync('temp/out') && mkdirSync('temp/out');
     const filePath =  'temp/updatedlib.zip' ;

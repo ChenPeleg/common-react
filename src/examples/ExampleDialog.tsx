@@ -15,8 +15,8 @@ export const ExampleDialog = () => {
             }
         >
             <p>
-                This popover is a simple example of a popover component, based on the HTML
-                <a className={'text-app-blue'} href={'https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/popover'}> popover
+                This dialog is a simple example of a dialog component, based on the HTML
+                <a className={'text-app-blue'} href={'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog'}> dialog
                     element.</a>
             </p>
             <p className={'w-32'}>
@@ -30,6 +30,7 @@ export const ExampleDialog = () => {
                 </button>
 
                 <DialogModal
+
                     showDialog={showModal}
                     setShowDialog={setShowModal}
 
@@ -46,21 +47,14 @@ export const ExampleDialog = () => {
                             {/* The actual dialog panel  */}
                             <div
                                 id={'dialog'}
-                                className="mx-auto max-w-md rounded-md bg-white p-6"
+                                className="mx-auto max-w-md rounded-md bg-white p-6 flex flex-col gap-4 shadow-lg"
                             >
                                 <div className="pb-3">{'icon'}</div>
                                 <div id="dialog-title" className="text-2xl font-medium">
-                                    {'title'}
+                                  This is my modal dialog
                                 </div>
-                                <div
-                                    id="dialog-description"
-                                    className="text-app-grey-10 w-96 pb-5"
-                                >
-                                    {'children'}
-                                </div>
-                                <div className="-mx-6 my-2 h-2 pb-3">
-                                    <hr />
-                                </div>
+
+
                                 <div className="flex w-full flex-row justify-end gap-2">
 
                                     <span>
@@ -70,18 +64,8 @@ export const ExampleDialog = () => {
                                         close
                                     </button>
                                 </span>
-                                    )
-                                    <div className="w-24">
-                                        <button
-                                            className={'h-9 py-1.5'}
-                                            onClick={() => {
 
-                                                setShowModal(false);
-                                            }}
-                                        >
-                                            {'trueText'}
-                                        </button>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>

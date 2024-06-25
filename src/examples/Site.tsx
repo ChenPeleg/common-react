@@ -127,7 +127,7 @@ export const Site = () => {
                 </nav>
             </nav>
 
-            <main className={'w-full h-full bg-amber-400  min-h-44 '}>
+            <main className={'w-full h-full   min-h-44 '}>
                 <Routes>
 
                     <Route

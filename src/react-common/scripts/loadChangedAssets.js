@@ -11,18 +11,19 @@ const updateChangedLibrary = async () => {
     const releaseData = await getLatestReleaseData('ChenPeleg', 'common-react');
 
     // normalize the tag name to be a valid folder name
-    const normelizedTagFoldeerName = releaseData.tag_name.replace(/[\\/:*?"<>|]/g, '_');
+    const versionName = releaseData.tag_name.replace(/[\\/:*?"<>|]/g, '_');
     const response = await getLatestRelease(releaseData);
     const body = Readable.fromWeb(response.body);
     !existsSync('temp') && mkdirSync('temp');
     const filePath = 'temp/updatedlib.zip';
     await writeFile(filePath, body);
     await runUnZipper('updatedlib.zip', 'temp', 'temp');
-    if (normelizedTagFoldeerName) {
+
+    if (versionName) {
         return;
     }
-    const answer = await promptUserConsole('`common-react` was copied to `temp` folder. Do you want to' +
-        ' move' + ' it to the `src`' + ' folder?' + ' (y/n) ');
+    const answer = await promptUserConsole(
+        `"common-react" (${versionName}) was copied to "temp" folder. Do you want to  move  it to the "src"  folder? ` + ' (y/n) ');
     if (answer.trim().toLowerCase() === 'y') {
         !existsSync('src') && mkdirSync('src');
         !existsSync('src/react-common') && mkdirSync('src/react-common');

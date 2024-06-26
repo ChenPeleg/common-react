@@ -21,20 +21,18 @@ export const promptUserConsole = async (qustionText) => {
 }
 
 
- const getLatestReleaseURL = async (owner, repo) => {
+export const getLatestReleaseData = async (owner, repo) => {
     const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/releases/latest`);
     if (!response.ok) throw new Error(`unexpected response ${response.statusText}`);
     return await response.json();
 };
 
-export const getLatestRelease  = (owner, repo) =>
-    getLatestReleaseURL(owner, repo)
-        .then(release => {
-            const asset = release.assets[0];
-            console.log(asset.browser_download_url)
-            return fetch(asset.browser_download_url );
-        })
-        .catch(console.error);
+export const getLatestRelease  = async (releaseData) => {
+    const asset = releaseData.assets[0];
+    console.log(asset.browser_download_url);
+    return fetch(asset.browser_download_url);
+}
+
 
 
 export const execPromise = async (command, extraParams = {}) => {

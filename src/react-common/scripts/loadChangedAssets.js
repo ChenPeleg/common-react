@@ -1,10 +1,10 @@
-import { pipeline, Readable } from 'node:stream';
+import { Readable } from 'node:stream';
 import { writeFile } from 'fs/promises';
 import { existsSync, mkdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { platform } from 'node:os';
 import { exec } from 'child_process';
-import { promisify } from 'util';
+
 
 
 
@@ -71,8 +71,8 @@ const updateChangedLibrary = async () => {
 
     !existsSync('temp') && mkdirSync('temp');
     !existsSync('temp/out') && mkdirSync('temp/out');
-    const filePath =  'temp/updatedlib.tar' ;
+    const filePath =  'temp/updatedlib.zip' ;
     await writeFile(filePath, body);
-    await runUnZipper('updatedlib.tar', 'temp', 'out');
+    await runUnZipper('updatedlib.zip', 'temp', 'out');
 };
 updateChangedLibrary().then();

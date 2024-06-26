@@ -54,7 +54,7 @@ export const runUnZipper = async (
 ) => {
     if (platform() === "win32") {
         const psCommand = `Expand-Archive -Path ${resolve(
-            tempDir)}/${fileName} -DestinationPath out`;
+            tempDir)}/${fileName} -DestinationPath ${outDir}`
         await execPromise(psCommand, {
             cwd: tempDir,
             shell: "powershell.exe",

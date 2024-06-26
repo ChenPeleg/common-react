@@ -66,13 +66,13 @@ const updateChangedLibrary = async () => {
     // `https://github.com/ChenPeleg/applinks-client/archive/refs/tags/v0.18.zip`;
     // const releaseUrl = `https://github.com/ChenPeleg/applinks-client/releases/latest`;
 
-    const response = await getLatestRelease('ChenPeleg', 'applinks-client');
+    const response = await getLatestRelease('ChenPeleg', 'common-react');
     const body = Readable.fromWeb(response.body);
 
     !existsSync('temp') && mkdirSync('temp');
     !existsSync('temp/out') && mkdirSync('temp/out');
-    const filePath =  'temp/updatedlib.zip' ;
+    const filePath =  'temp/updatedlib.tar' ;
     await writeFile(filePath, body);
-    await runUnZipper('updatedlib.zip', 'temp', 'out');
+    await runUnZipper('updatedlib.tar', 'temp', 'out');
 };
 updateChangedLibrary().then();

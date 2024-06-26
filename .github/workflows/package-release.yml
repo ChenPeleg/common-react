@@ -31,7 +31,7 @@ jobs:
               --generate-notes
       - name: Archive production artifacts
         run: |
-          tar -cvf react-common.tar src/react-common
+          zip -r react-common.zip src/react-common
       - name: check folder structure
         run: |
       - name: concatenate version number to tar file
@@ -39,12 +39,12 @@ jobs:
           tag: ${{ github.ref_name }}
         #         echo "// $tag \n" >> temp.txt
         run: |
-          cat react-common.tar >> temp.txt
-          mv temp.txt react-common.tar
+          cat react-common.zip  >> temp.txt
+          mv temp.txt react-common.zip
       - name: Add artifacts to the release 2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ github.ref_name }}
         run: |
-          gh release upload "$tag" react-common.tar --clobber
+          gh release upload "$tag" react-common.zip --clobber
 

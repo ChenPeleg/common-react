@@ -4,5 +4,5 @@ export interface MenuOption {
     label: string | ReactNode;
     id: string | number;
     data?: any;
-    icon?: string
+    icon?: string | any
 }

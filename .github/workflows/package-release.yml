@@ -31,7 +31,7 @@ jobs:
               --generate-notes
       - name: Archive production artifacts
         run: |
-            tar -cvf react-common.tar src/react-common
+          tar -cvf react-common.tar src/react-common
       - name: check folder structure
         run: |
       - name: concatenate version number to tar file

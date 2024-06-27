@@ -1,5 +1,4 @@
-import { Readable } from 'node:stream';
-import { writeFile } from 'fs/promises';
+
 import { cpSync, existsSync, mkdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { platform } from 'node:os';
@@ -8,11 +7,7 @@ import * as readline from 'node:readline/promises';  // This uses the promise-ba
 import { stdin as input, stdout as output } from 'node:process';
 
 
-export const copyFilesToSrc = async () => {
 
-    const res = await execPromise(psCommand);
-    console.log(res);
-}
 export const promptUserConsole = async (qustionText) => {
     const rl = readline.createInterface({ input, output });
     const answer = await rl.question(qustionText);

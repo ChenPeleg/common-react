@@ -1,6 +1,6 @@
 {
   "name": "common-react",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "hours report based on git repo",
   "main": "./src/react-common/scripts/loadChangedAssets.js",
   "bin": "./src/react-common/scripts/loadChangedAssets.js",
@@ -25,6 +25,7 @@
     "dev": "vite",
     "test": "vitest --run",
     "build": "tsc && vite build",
+    "preinstall": "node src/scripts/preinstall.js",
     "build:pages": "tsc && vite build --mode production",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"

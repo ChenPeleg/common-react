@@ -1,6 +1,6 @@
 import { Readable } from 'node:stream';
 import { writeFile } from 'fs/promises';
-import { existsSync, mkdirSync } from 'node:fs';
+import { cpSync, existsSync, mkdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { platform } from 'node:os';
 import { exec } from 'child_process';
@@ -72,3 +72,10 @@ export const runUnZipper = async (
 
 
 
+export const copyFolderRecursively = async (source, target) => {
+    if (!existsSync(resolve(target))) {
+        mkdirSync(resolve(target), { recursive: true });
+    }
+
+    cpSync(source, target, { recursive: true });
+}

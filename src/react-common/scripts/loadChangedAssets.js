@@ -25,9 +25,8 @@ const updateChangedLibrary = async () => {
     if (versionName) {
         // return;
     }
-    const answer = 'y'
-        // await promptUserConsole( `"common-react" (${versionName}) was copied to
-    // "temp" folder. Do you want to  move  it to the "src"  folder? ` + ' (y/n) ');
+    const answer = await promptUserConsole( `"common-react" (${versionName}) was copied to
+     "temp" folder. Do you want to  move  it to the "src"  folder? ` + ' (y/n) ');
     if (answer.trim().toLowerCase() === 'y'  ) {
         !existsSync('src') && mkdirSync('src');
         await copyFolderRecursively('temp/react-common', `src/react-common`);

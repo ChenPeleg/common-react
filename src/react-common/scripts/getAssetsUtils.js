@@ -8,9 +8,9 @@ import { stdin as input, stdout as output } from 'node:process';
 
 
 
-export const promptUserConsole = async (qustionText) => {
+export const promptUserConsole = async (questionText) => {
     const rl = readline.createInterface({ input, output });
-    const answer = await rl.question(qustionText);
+    const answer = await rl.question(questionText);
     rl.close();
     return answer;
 }

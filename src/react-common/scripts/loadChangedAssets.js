@@ -5,6 +5,7 @@ import { existsSync, mkdirSync } from 'node:fs';
 import {
     getLatestRelease, getLatestReleaseData, promptUserConsole, runUnZipper,
 } from './getAssetsUtils.js';
+import { renameFolder } from './renameFolder.js';
 
 
 const updateChangedLibrary = async () => {
@@ -26,7 +27,7 @@ const updateChangedLibrary = async () => {
         `"common-react" (${versionName}) was copied to "temp" folder. Do you want to  move  it to the "src"  folder? ` + ' (y/n) ');
     if (answer.trim().toLowerCase() === 'y') {
         !existsSync('src') && mkdirSync('src');
-        !existsSync('src/react-common') && mkdirSync('src/react-common');
+        renameFolder('temp/react-common', `src/react-common-${versionName}`);
     }
 };
 updateChangedLibrary().then();

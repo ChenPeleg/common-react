@@ -1,3 +1,5 @@
+#! /usr/bin/env node
+
 import { Readable } from 'node:stream';
 import { writeFile } from 'fs/promises';
 import { existsSync, mkdirSync } from 'node:fs';

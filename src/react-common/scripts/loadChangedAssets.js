@@ -3,9 +3,11 @@ import { writeFile } from 'fs/promises';
 import { existsSync, mkdirSync } from 'node:fs';
 
 import {
-    getLatestRelease, getLatestReleaseData, promptUserConsole, runUnZipper,
+    copyFolderRecursively, getLatestRelease,
+    getLatestReleaseData,
+    promptUserConsole,
+    runUnZipper,
 } from './getAssetsUtils.js';
-import { copyFolderRecursively, renameFolder } from './renameFolder.js';
 
 
 const updateChangedLibrary = async () => {
@@ -28,7 +30,7 @@ const updateChangedLibrary = async () => {
     // "temp" folder. Do you want to  move  it to the "src"  folder? ` + ' (y/n) ');
     if (answer.trim().toLowerCase() === 'y'  ) {
         !existsSync('src') && mkdirSync('src');
-        await copyFolderRecursively('temp/react-common', `temp/react-common-update`);
+        await copyFolderRecursively('temp/react-common', `src/react-common`);
     }
 };
 updateChangedLibrary().then();

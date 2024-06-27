@@ -21,13 +21,13 @@ const updateChangedLibrary = async () => {
     await runUnZipper('updatedlib.zip', 'temp', 'temp');
 
     if (versionName) {
-        return;
+        // return;
     }
     const answer = await promptUserConsole(
         `"common-react" (${versionName}) was copied to "temp" folder. Do you want to  move  it to the "src"  folder? ` + ' (y/n) ');
     if (answer.trim().toLowerCase() === 'y') {
         !existsSync('src') && mkdirSync('src');
-        renameFolder('temp/react-common', `src/react-common-${versionName}`);
+        renameFolder('temp/react-common', `temp/react-common-${versionName}`);
     }
 };
 updateChangedLibrary().then();

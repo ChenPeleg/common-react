@@ -33,5 +33,6 @@ const updateChangedLibrary = async () => {
         await copyFolderRecursively('temp/react-common', `src/react-common`);
     }
 };
+console.log('Loading the latest version of "common-react" library')
 updateChangedLibrary().then();
 

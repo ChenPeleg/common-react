@@ -5,7 +5,7 @@ import { existsSync, mkdirSync } from 'node:fs';
 import {
     getLatestRelease, getLatestReleaseData, promptUserConsole, runUnZipper,
 } from './getAssetsUtils.js';
-import { renameFolder } from './renameFolder.js';
+import { copyFolderRecursively, renameFolder } from './renameFolder.js';
 
 
 const updateChangedLibrary = async () => {
@@ -23,11 +23,12 @@ const updateChangedLibrary = async () => {
     if (versionName) {
         // return;
     }
-    const answer = await promptUserConsole(
-        `"common-react" (${versionName}) was copied to "temp" folder. Do you want to  move  it to the "src"  folder? ` + ' (y/n) ');
-    if (answer.trim().toLowerCase() === 'y') {
+    const answer = 'y'
+        // await promptUserConsole( `"common-react" (${versionName}) was copied to
+    // "temp" folder. Do you want to  move  it to the "src"  folder? ` + ' (y/n) ');
+    if (answer.trim().toLowerCase() === 'y'  ) {
         !existsSync('src') && mkdirSync('src');
-        renameFolder('temp/react-common', `temp/react-common-${versionName}`);
+        await copyFolderRecursively('temp/react-common', `temp/react-common-update`);
     }
 };
 updateChangedLibrary().then();

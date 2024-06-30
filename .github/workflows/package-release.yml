@@ -36,7 +36,7 @@ jobs:
         env:
           tag: ${{ github.ref_name }}
         run: |
-          sed -i "s/# Common React/# Common React ${tag#v}/g" src/react-common/README.md
+          sed -i "s/# Common React/# Common React Version${tag#v}/g" src/react-common/README.md
       - name: Archive production artifacts
         run: | 
           cd src && zip -r ../react-common.zip react-common

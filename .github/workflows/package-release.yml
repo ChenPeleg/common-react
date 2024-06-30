@@ -32,11 +32,11 @@ jobs:
       - name: Add the readme file to the react-common folder
         run: |
           cp README.md src/react-common
-#      - name: Add tag version number to readme file
-#        env:
-#          tag: ${{ github.ref_name }}
-#        run: |
-#          sed -i "s/# Common React/# Common React ${tag#v}/g" src/react-common/README.md
+      - name: Add tag version number to readme file
+        env:
+          tag: ${{ github.ref_name }}
+        run: |
+          sed -i "s/# Common React/# Common React ${tag#v}/g" src/react-common/README.md
       - name: Archive production artifacts
         run: | 
           cd src && zip -r ../react-common.zip react-common

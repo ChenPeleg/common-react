@@ -62,9 +62,6 @@ export const runUnZipper = async (
 
 
 const updateChangedLibrary = async () => {
-    //const url =
-    // `https://github.com/ChenPeleg/applinks-client/archive/refs/tags/v0.18.zip`;
-    // const releaseUrl = `https://github.com/ChenPeleg/applinks-client/releases/latest`;
 
     const response = await getLatestRelease('ChenPeleg', 'common-react');
     const body = Readable.fromWeb(response.body);

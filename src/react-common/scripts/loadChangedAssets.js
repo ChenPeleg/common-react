@@ -20,7 +20,7 @@ const getLatestRelease  = (owner, repo) =>
     getLatestReleaseURL(owner, repo)
     .then(release => {
         const asset = release.assets[0];
-        console.log(asset.browser_download_url)
+        console.log('from' , asset.browser_download_url)
         return fetch(asset.browser_download_url );
     })
     .catch(console.error);

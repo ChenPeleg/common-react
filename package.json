@@ -1,6 +1,6 @@
 {
   "name": "common-react",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "common react components",
   "main": "./src/react-common/scripts/loadChangedAssets.js",
   "bin": "./src/react-common/scripts/loadChangedAssets.js",

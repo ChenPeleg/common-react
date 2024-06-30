@@ -6,6 +6,18 @@ import { exec } from 'child_process';
 import * as readline from 'node:readline/promises';  // This uses the promise-based APIs
 import { stdin as input, stdout as output } from 'node:process';
 
+import { rmSync } from "node:fs";
+
+
+export const deleteFilesFromDir = async (directory = "temp") => {
+    const dir = resolve(directory);
+    try {
+        rmSync(dir, { recursive: true, force: true });
+        mkdirSync(dir, { recursive: true });
+    } catch (e) {
+      console.error(e)
+    }
+};
 
 
 export const promptUserConsole = async (questionText) => {

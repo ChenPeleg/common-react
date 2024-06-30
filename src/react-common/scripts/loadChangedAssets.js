@@ -6,7 +6,8 @@ import { existsSync, mkdirSync } from 'node:fs';
 
 
 import {
-    copyFolderRecursively, getLatestRelease,
+    copyFolderRecursively, deleteFilesFromDir,
+    getLatestRelease,
     getLatestReleaseData,
     promptUserConsole,
     runUnZipper,
@@ -14,6 +15,7 @@ import {
 
 
 const updateChangedLibrary = async () => {
+    await deleteFilesFromDir('temp/react-common');
     const releaseData = await getLatestReleaseData('ChenPeleg', 'common-react');
 
     // normalize the tag name to be a valid folder name

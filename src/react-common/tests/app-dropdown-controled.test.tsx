@@ -6,6 +6,7 @@ import { AppDropdownControlled } from '../dropdown/AppDropdownControlled.tsx';
 
 describe('AppDropdownControlled', () => {
 
+
     const mockSetSelectedOption = vi.fn();
     const options = [
         {

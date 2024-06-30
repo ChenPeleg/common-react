@@ -5,8 +5,6 @@ import { describe, expect, it, vi } from 'vitest';
 import { AppDropdownControlled } from '../dropdown/AppDropdownControlled.tsx';
 
 describe('AppDropdownControlled', () => {
-
-
     const mockSetSelectedOption = vi.fn();
     const options = [
         {

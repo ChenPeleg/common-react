@@ -1,5 +1,4 @@
 export const parseJwt = (jwt: string): Record<string | number, any> | null => {
-    // new version of parseJwt
     const b64DecodeUnicode = (str: string) =>
         decodeURIComponent(
             Array.prototype.map

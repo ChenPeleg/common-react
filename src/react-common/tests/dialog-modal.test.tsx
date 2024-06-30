@@ -4,7 +4,6 @@ import { DialogModal } from '../dialog/DialogModal.tsx';
 
 describe('DialogModal component', async () => {
     beforeAll(() => {
-
         HTMLDialogElement.prototype.show = vi.fn();
         HTMLDialogElement.prototype.showModal = vi.fn();
         HTMLDialogElement.prototype.close = vi.fn();

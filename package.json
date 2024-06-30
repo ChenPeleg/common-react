@@ -1,7 +1,7 @@
 {
   "name": "common-react",
-  "version": "0.0.8",
-  "description": "hours report based on git repo",
+  "version": "0.0.9",
+  "description": "common react components",
   "main": "./src/react-common/scripts/loadChangedAssets.js",
   "bin": "./src/react-common/scripts/loadChangedAssets.js",
   "files": [

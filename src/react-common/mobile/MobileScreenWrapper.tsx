@@ -24,32 +24,34 @@ export const MobileScreenWrapper = ({
         showPhoneFrame = false;
     }
     return (
-        <div className={'flex flex-row justify-center'}>
-            <div
-                id={'max-mobile-size-limiter'}
-                style={{
-                    width: showPhoneFrame ? '' : `${windowWidth}px`,
-                    height: showPhoneFrame ? '' : `${windowHeight}px`,
-                    maxWidth: showPhoneFrame
-                        ? screenTypes[screenTypes.length - 1].x + 50
-                        : '',
-                    // maxHeight: showPhoneFrame
-                    //     ? screenTypes[screenTypes.length - 1].y + 50
-                    //     : '',
-                }}
-                className={`bg-transparent p-1 ${showPhoneFrame ? '' : '  max-h-[844px] max-w-[480px]'}`}
-            >
-                {showPhoneFrame ? (
-                    <MobilePhone
-                        screenTypes={screenTypes}
-                        figmaLink={figmaLink}
+        <>
+            {showPhoneFrame ? (
+                <div className={'flex flex-row justify-center'}>
+                    <div
+                        id={'max-mobile-size-limiter'}
+                        style={{
+                            width: showPhoneFrame ? '' : `${windowWidth}px`,
+                            height: showPhoneFrame ? '' : `${windowHeight}px`,
+                            maxWidth: showPhoneFrame
+                                ? screenTypes[screenTypes.length - 1].x + 50
+                                : '',
+                            // maxHeight: showPhoneFrame
+                            //     ? screenTypes[screenTypes.length - 1].y + 50
+                            //     : '',
+                        }}
+                        className={`bg-transparent p-1 ${showPhoneFrame ? '' : '  max-h-[844px] max-w-[480px]'}`}
                     >
-                        {children}
-                    </MobilePhone>
-                ) : (
-                    <>{children}</>
-                )}
-            </div>
-        </div>
+                        <MobilePhone
+                            screenTypes={screenTypes}
+                            figmaLink={figmaLink}
+                        >
+                            {children}
+                        </MobilePhone>
+                    </div>
+                </div>
+            ) : (
+                <>{children}</>
+            )}
+        </>
     );
 };

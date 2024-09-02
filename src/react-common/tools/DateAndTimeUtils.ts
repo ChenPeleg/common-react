@@ -1,6 +1,8 @@
 import { Epoc } from '../models/EpocModle.ts';
 
 export class DateAndTimeUtils {
+    static epocDay = 86400000;
+
     static dateToEpoch(date: Date): Epoc {
         return date.getTime() as Epoc;
     }
@@ -9,16 +11,36 @@ export class DateAndTimeUtils {
         return new Date(epoch);
     }
 
-    static getTimeMinuetsAndHoursFromEpoc(epoch: Epoc): string {
-        return new Date(epoch).toLocaleTimeString('he-IL', {
+    static getTimeMinuetsAndHoursFromEpoc(
+        epoch: Epoc,
+        locales: Intl.LocalesArgument = 'he-IL'
+    ): string {
+        return new Date(epoch).toLocaleTimeString(locales, {
             hour: '2-digit',
             minute: '2-digit',
             hour12: false,
         });
     }
 
-    static getDateFromEpoc(epoch: Epoc): string {
-        return new Date(epoch).toLocaleDateString('he-IL', {
+    static getTimeMinuetsAndHoursFromEpocAndDateIfMoreThanADay(
+        epoch: Epoc,
+        locales: Intl.LocalesArgument = 'he-IL'
+    ): string {
+        if (new Date().getTime() - epoch > DateAndTimeUtils.epocDay) {
+            return DateAndTimeUtils.getDateFromEpoc(epoch);
+        }
+        return new Date(epoch).toLocaleTimeString(locales, {
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false,
+        });
+    }
+
+    static getDateFromEpoc(
+        epoch: Epoc,
+        locales: Intl.LocalesArgument = 'he-IL'
+    ): string {
+        return new Date(epoch).toLocaleDateString(locales, {
             year: '2-digit',
             month: '2-digit',
             day: '2-digit',
@@ -33,7 +55,6 @@ export class DateAndTimeUtils {
         const now = Date.now();
         const diff = now + 36001 - epoch;
         const diffInMin = Math.floor(diff / 60000);
-        console.log(diffInMin);
 
         const diffInHours = Math.floor(diffInMin / 60);
         const diffMinMod = diffInMin % 60;

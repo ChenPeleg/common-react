@@ -8,10 +8,10 @@ export const Toast = ({
     setShow,
     children,
     className,
-    config
+    config,
 }: {
     show: boolean;
-    config: ToastConfig
+    config: ToastConfig;
     setShow: (show: boolean) => void;
     children: React.ReactNode | ((closePopover: () => void) => React.ReactNode);
     className?: string;
@@ -23,7 +23,6 @@ export const Toast = ({
         e: Event & { newState: 'open' | 'close' }
     ) => {
         const isPopoverGoesOpen = e.newState === 'open';
-
         setShow(isPopoverGoesOpen);
     };
 
@@ -47,56 +46,82 @@ export const Toast = ({
     useEffect(() => {
         if (show) {
             const popover = popOverRef.current;
+            if (config.isLegacy) {
+                // setShow(false);
+                return;
+            }
             popover && popover['showPopover'] && popover['showPopover']();
         } else {
             setTimeout(() => {
                 const popover = popOverRef.current;
+                if (config.isLegacy) {
+                    // setShow(false);
+                    return;
+                }
                 popover && popover['hidePopover'] && popover['hidePopover']();
             }, 200);
         }
     }, [show]);
-    const setPopoverPosition = () => {
-
-    };
-    console.log(config.position)
+    const setPopoverPosition = () => {};
 
     const styleAttributes = {
-        '--toast-right' : config.position?.right || 'none',
-        '--toast-left' : config.position?.left || 'none',
-        '--toast-top' :  config.position?.top || 'none',
-        '--toast-bottom' :  config.position?.bottom || 'none',
-        '--toast-width' : config.size?.width || '240px',
-        '--toast-height' : config.size?.width || '100px',
-    }
-
+        '--toast-right': config.position?.right || 'none',
+        '--toast-left': config.position?.left || 'none',
+        '--toast-top': config.position?.top || 'none',
+        '--toast-bottom': config.position?.bottom || 'none',
+        '--toast-width': config.size?.width || '240px',
+        '--toast-height': config.size?.height || '150px',
+    };
+  
     const closeModal = () => {
         const popover = popOverRef.current;
+        if (config.isLegacy) {
+            setShow(false);
+            return;
+        }
         popover && popover['hidePopover'] && popover['hidePopover']();
     };
     return (
         <div
-    // @ts-expect-error this is ok
+            // @ts-expect-error this is ok
             style={{
-                ...styleAttributes
+                ...styleAttributes,
             }}
             className={'relative flex flex-row justify-center'}
             ref={buttonRef}
         >
-            <div
-                style={{
-                    boxShadow: '0 1px 10px #0000001a, 0 2px 15px #0000000d',
-                    ...styleAttributes
-                }}
-                className={` rounded ${styles.toastPopover}   ${className}  top-3`}
-                // @ts-expect-error is supported in most browsers
-                ref={popOverRef}
-                id="app-toast"
-                popover={'manual'}
-            >
-                {typeof children === 'function'
-                    ? children(closeModal)
-                    : children}
-            </div>
+            {config.isLegacy ? (
+                <div
+                    style={{
+                        boxShadow: '0 1px 10px #0000001a, 0 2px 15px #0000000d',
+                        ...styleAttributes,
+                    }}
+                    className={` rounded ${styles.legacyToastPopover}  ${show ? styles.legacyToastPopoverOpen : ''}      ${className}`}
+                    // @ts-expect-error is supported in most browsers
+                    ref={popOverRef}
+                    id="app-legacy-toast"
+                >
+                    {typeof children === 'function'
+                        ? children(closeModal)
+                        : children}
+                </div>
+            ) : (
+                <div
+                    style={{
+                        boxShadow: '0 1px 10px #0000001a, 0 2px 15px #0000000d',
+                        ...styleAttributes,
+                    }}
+                    className={` rounded ${styles.toastPopover}   ${className}  `}
+                    // @ts-expect-error is supported in most browsers
+                    ref={popOverRef}
+                    id="app-toast"
+                    popover={'manual'}
+                >
+                    {typeof children === 'function'
+                        ? children(closeModal)
+                        : children}
+                </div>
+            )}
         </div>
     );
 };

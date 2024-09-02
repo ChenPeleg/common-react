@@ -57,6 +57,7 @@ export class HttpClient {
         if (data === undefined || data === null) {
             return undefined;
         }
+
         if (
             _options?.headers &&
             // @ts-expect-error this should work
@@ -66,6 +67,14 @@ export class HttpClient {
             return JSON.stringify(data);
         }
         return data;
+    }
+
+    private static cloneConfig(config: HttpClientConfig) {
+        const { headers, ...restConfig } = config;
+        return {
+            ...restConfig,
+            headers: { ...headers },
+        };
     }
 
     async request({
@@ -80,6 +89,19 @@ export class HttpClient {
         options?: RequestInit;
     }) {
         try {
+            options = { ...options };
+
+            if (body instanceof FormData) {
+                if (options.headers) {
+                    // @ts-expect-error this is a FormData object
+                    delete options.headers['Content-Type'];
+                }
+            } else {
+                options.headers = options.headers || {};
+                // @ts-expect-error this should work
+                options.headers['Content-Type'] = 'application/json';
+            }
+
             const fetchConfig: RequestInit = this.buildFetchConfig(
                 method,
                 body,
@@ -108,19 +130,19 @@ export class HttpClient {
         });
     }
 
-    async post(url: string, body: any, options?: RequestInit) {
-        if (body instanceof FormData) {
-            options = { ...options };
-            // @ts-expect-error this should work
-            if (options?.headers['Content-Type'] === 'auto') {
-                // @ts-expect-error this is a FormData object
-                delete options.headers['Content-Type'];
-            }
-        }
-
+    async post(url: string, body?: any, options?: RequestInit) {
         return this.request({
             url,
             method: 'POST',
+            body,
+            options,
+        });
+    }
+
+    async patch(url: string, body?: any, options?: RequestInit) {
+        return this.request({
+            url,
+            method: 'PATCH',
             body,
             options,
         });
@@ -166,7 +188,13 @@ export class HttpClient {
                 statusText: originalResponse.statusText,
             };
             const clone = new Response(null, ResponseInit);
-            const data = await originalResponse.json();
+            let data = null;
+            try {
+                data = await originalResponse.json();
+            } catch (e) {
+                // no content
+            }
+
             // @ts-expect-error adding data to the response object
             clone.data = data;
             return clone;
@@ -179,9 +207,15 @@ export class HttpClient {
         data: any,
         _options?: RequestInit
     ): RequestInit {
+        const baseConfigClone = HttpClient.cloneConfig(this.config);
         const { headers, mode, cache, credentials, redirect, referrerPolicy } =
-            this.config;
+            baseConfigClone;
+        if (data instanceof FormData && headers && headers['Content-Type']) {
+            delete headers['Content-Type'];
+        }
+
         return {
+            ..._options,
             method,
             mode,
             cache,
@@ -190,7 +224,6 @@ export class HttpClient {
             redirect,
             referrerPolicy,
             body: HttpClient.buildBody(data, _options), // body data type must match "Content-Type" header
-            ..._options,
         };
     }
 }

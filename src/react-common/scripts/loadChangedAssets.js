@@ -4,15 +4,14 @@ import { Readable } from 'node:stream';
 import { writeFile } from 'fs/promises';
 import { existsSync, mkdirSync } from 'node:fs';
 
-
 import {
-    copyFolderRecursively, deleteFilesFromDir,
+    copyFolderRecursively,
+    deleteFilesFromDir,
     getLatestRelease,
     getLatestReleaseData,
     promptUserConsole,
     runUnZipper,
 } from './getAssetsUtils.js';
-
 
 const updateChangedLibrary = async () => {
     await deleteFilesFromDir('temp/react-common');
@@ -30,12 +29,14 @@ const updateChangedLibrary = async () => {
     if (versionName) {
         // return;
     }
-    const answer = await promptUserConsole( `"common-react" (${versionName}) was copied to
-     "temp" folder. Do you want to  move  it to the "src"  folder? ` + ' (y/n) ');
-    if (answer.trim().toLowerCase() === 'y'  ) {
+    const answer = await promptUserConsole(
+        `"common-react" (${versionName}) was copied to
+     "temp" folder. Do you want to  move  it to the "src"  folder? ` + ' (y/n) '
+    );
+    if (answer.trim().toLowerCase() === 'y') {
         !existsSync('src') && mkdirSync('src');
         await copyFolderRecursively('temp/react-common', `src/react-common`);
     }
 };
-console.log('Loading the latest version of "common-react" library')
+console.info('Loading the latest version of "common-react" library');
 updateChangedLibrary().then();

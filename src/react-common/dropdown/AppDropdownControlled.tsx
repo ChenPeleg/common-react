@@ -41,9 +41,19 @@ export const AppDropdownControlled = ({
         setIsOpen(false);
     }
 
+    function onkeydownHandler(event: React.KeyboardEvent) {
+        if (event.key === 'Delete') {
+            // @ts-expect-error to reset the value of the select
+            setSelectedOption(null);
+        }
+    }
+
     return (
         <OutsideAlerter outSideAlertHandler={() => setIsOpen(false)}>
-            <div className="relative inline-block text-left">
+            <div
+                onKeyDown={onkeydownHandler}
+                className="relative inline-block text-left"
+            >
                 <div>
                     {config?.customButton ? (
                         config?.customButton({

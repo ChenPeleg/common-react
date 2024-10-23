@@ -6,6 +6,11 @@ This package is a collection of common React components and utilities that are u
 
 Just take the component you need and paste it into your project. You can then modify it as needed.
 
+You can also install everything and use it as a starting point for your project, like this:
+
+```bash
+npx common-react
+```
 
 # Use cases 
 

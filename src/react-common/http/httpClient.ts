@@ -178,9 +178,11 @@ export class HttpClient {
             this.config?.headers &&
             this.config.headers['Content-Type'] === 'application/json'
         ) {
-            const originalResponse = await response;
+            const originalResponse: Response = await response;
             if (!originalResponse.ok) {
-                throw new Error('Network Error');
+                const responseCloe = originalResponse.clone();
+                // @ts-expect-error cause is a valid property
+                throw new Error('Network Error', { cause: responseCloe });
             }
             const ResponseInit: ResponseInit = {
                 headers: originalResponse.headers,
